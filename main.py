@@ -1,5 +1,14 @@
-print("TT_PITBULL START")
+import os
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes
 
-BOT_NAME = "TT_PITBULL"
+TOKEN = os.getenv("BOT_TOKEN")
 
-print(f"{BOT_NAME} online")
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("TT_PITBULL online 🐶")
+
+app = Application.builder().token(TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+
+print("TT_PITBULL avviato")
+app.run_polling()
