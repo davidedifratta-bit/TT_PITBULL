@@ -102,5 +102,6 @@ app.add_handler(
     MessageHandler(filters.TEXT & ~filters.COMMAND, ricevi_match)
 )
 print("TT_PITBULL avviato")
+print("VERSIONE FASE1")
 
 app.run_polling()
