@@ -76,6 +76,10 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         prob1 = 100 - base_prob
         prob2 = base_prob
+    if prob1 > prob2:
+        vincitore = giocatore1
+    else:
+        vincitore = giocatore2
 
     vantaggio = abs(base_prob - 50)
 
@@ -114,7 +118,7 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"💰 Stake consigliato: {stake}\n"
         f"🎯 Valore: {valore}\n\n"
         f"🏆 Pronostico:\n"
-        f"Vittoria {giocatore1}\n\n"
+        f"Vittoria {vincitore}\n\n"
         f"📌 Motivo:\n"
         f"{motivo}"
     )
