@@ -97,6 +97,12 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         valore = "🔴 BASSO"
         stake = "1%"
+    if fiducia >= 8:
+        motivo = "Maggiore affidabilità nelle simulazioni."
+    elif fiducia == 7:
+        motivo = "Leggero vantaggio statistico."
+    else:
+        motivo = "Match equilibrato con margine ridotto."
 
     await update.message.reply_text(
         f"📊 ANALISI MATCH\n\n"
@@ -108,7 +114,9 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"💰 Stake consigliato: {stake}\n"
         f"🎯 Valore: {valore}\n\n"
         f"🏆 Pronostico:\n"
-        f"Vittoria {giocatore1}"
+        f"Vittoria {giocatore1}\n\n"
+        f"📌 Motivo:\n"
+        f"{motivo}"
     )
     return
 
