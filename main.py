@@ -82,16 +82,7 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     
 
-    await update.message.reply_text(
-        f"📊 ANALISI MATCH\n\n"
-        f"Match: {match}\n\n"
-        f"Probabilità:\n"
-        f"{giocatore1}: 60%\n"
-        f"{giocatore2}: 40%\n\n"
-        f"Fiducia: 7/10\n\n"
-        f"Pronostico:\n"
-        f"Vittoria {giocatore1}"
-    )
+    
 
 app = Application.builder().token(TOKEN).build()
 
