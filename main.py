@@ -61,7 +61,14 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     seed = int(hashlib.md5(chiave.encode()).hexdigest(), 16)
 
-    base_prob = 55 + (seed % 21)
+    livello = seed % 100
+
+    if livello < 50:
+        base_prob = 52 + (seed % 5)      # 52-56
+    elif livello < 85:
+        base_prob = 57 + (seed % 8)      # 57-64
+    else:
+        base_prob = 65 + (seed % 6)      # 65-70
 
     if giocatore1 == nomi_ordinati[0]:
         prob1 = base_prob
@@ -70,11 +77,13 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         prob1 = 100 - base_prob
         prob2 = base_prob
 
-    if base_prob >= 70:
+    vantaggio = abs(base_prob - 50)
+
+    if vantaggio >= 18:
         fiducia = 9
-    elif base_prob >= 65:
+    elif vantaggio >= 14:
         fiducia = 8
-    elif base_prob >= 60:
+    elif vantaggio >= 10:
         fiducia = 7
     else:
         fiducia = 6
