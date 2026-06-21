@@ -33,14 +33,7 @@ async def setka(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Pronostico:\n"
         "Vittoria Ivanov"
     )
-async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    if not context.user_data.get("attesa_match"):
-        return
-
-    match = update.message.text
-
-    context.user_data["attesa_match"] = False
 
 async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
@@ -48,17 +41,45 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     match = update.message.text
-
     context.user_data["attesa_match"] = False
 
     try:
-        giocatore1, giocatore2 = match.split(" vs ")
+        giocatore1, giocatore2 = [x.strip() for x in match.split("vs")]
     except:
         await update.message.reply_text(
-            "❌ Formato non valido.\n\n"
-            "Usa:\n"
-            "Ivanov vs Petrov"
+            "❌ Formato non valido.\n\nEsempio:\nIvanov vs Petrov"
         )
+        return
+
+    import random
+
+    prob1 = random.randint(55, 75)
+    prob2 = 100 - prob1
+
+    fiducia = random.randint(6, 9)
+
+    if fiducia >= 8:
+        valore = "🟢 ALTO"
+        stake = "3%"
+    elif fiducia == 7:
+        valore = "🟡 MEDIO"
+        stake = "2%"
+    else:
+        valore = "🔴 BASSO"
+        stake = "1%"
+
+    await update.message.reply_text(
+        f"📊 ANALISI MATCH\n\n"
+        f"🏓 Match: {giocatore1} vs {giocatore2}\n\n"
+        f"📈 Probabilità:\n"
+        f"{giocatore1}: {prob1}%\n"
+        f"{giocatore2}: {prob2}%\n\n"
+        f"🔥 Fiducia: {fiducia}/10\n"
+        f"💰 Stake consigliato: {stake}\n"
+        f"🎯 Valore: {valore}\n\n"
+        f"🏆 Pronostico:\n"
+        f"Vittoria {giocatore1}"
+    )
         return
 
     await update.message.reply_text(
