@@ -80,6 +80,12 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         vincitore = giocatore1
     else:
         vincitore = giocatore2
+        percentuale_vincitore = max(prob1, prob2)
+
+        barra = (
+            "█" * (percentuale_vincitore // 10)
+            + "░" * (10 - (percentuale_vincitore // 10))
+        )
 
     vantaggio = abs(base_prob - 50)
 
@@ -122,6 +128,7 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"📈 Probabilità:\n"
         f"{giocatore1}: {prob1}%\n"
         f"{giocatore2}: {prob2}%\n\n"
+        f"📊 Forza: {barra} {max(prob1, prob2)}%\n\n"
         f"🔥 Fiducia: {fiducia}/10\n"
         f"💰 Stake consigliato: {stake}\n"
         f"🎯 Valore: {valore}\n\n"
