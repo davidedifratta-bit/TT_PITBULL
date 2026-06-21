@@ -80,7 +80,7 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🏆 Pronostico:\n"
         f"Vittoria {giocatore1}"
     )
-    
+    return
 
     
 
