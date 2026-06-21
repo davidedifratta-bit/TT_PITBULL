@@ -107,6 +107,14 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motivo = "Leggero vantaggio statistico."
     else:
         motivo = "Match equilibrato con margine ridotto."
+        if fiducia >= 9:
+            trend = "Dominio netto del favorito"
+    elif fiducia == 8:
+            trend = "Favorito in forte crescita"
+    elif fiducia == 7:
+            trend = "Vantaggio moderato"
+    else:
+            trend = "Match equilibrato"
 
     await update.message.reply_text(
         f"📊 ANALISI MATCH\n\n"
@@ -119,6 +127,8 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🎯 Valore: {valore}\n\n"
         f"🏆 Pronostico:\n"
         f"Vittoria {vincitore}\n\n"
+        f"📈 Trend:\n"
+        f"{trend}\n\n"
         f"📌 Motivo:\n"
         f"{motivo}"
     )
