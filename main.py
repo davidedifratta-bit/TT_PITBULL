@@ -70,11 +70,11 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         prob1 = 100 - base_prob
         prob2 = base_prob
 
-    if prob1 >= 70:
+    if base_prob >= 70:
         fiducia = 9
-    elif prob1 >= 65:
+    elif base_prob >= 65:
         fiducia = 8
-    elif prob1 >= 60:
+    elif base_prob >= 60:
         fiducia = 7
     else:
         fiducia = 6
