@@ -1,4 +1,6 @@
 import os
+import random
+import hashlib
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 
@@ -51,12 +53,21 @@ async def ricevi_match(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    import random
+    
 
-    prob1 = random.randint(55, 75)
+    seed = int(hashlib.md5(match.encode()).hexdigest(), 16)
+
+    prob1 = 55 + (seed % 21)
     prob2 = 100 - prob1
 
-    fiducia = random.randint(6, 9)
+    if prob1 >= 70:
+        fiducia = 9
+    elif prob1 >= 65:
+        fiducia = 8
+    elif prob1 >= 60:
+        fiducia = 7
+    else:
+        fiducia = 6
 
     if fiducia >= 8:
         valore = "🟢 ALTO"
